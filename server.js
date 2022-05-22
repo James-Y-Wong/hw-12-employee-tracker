@@ -22,13 +22,80 @@ const db = mysql.createConnection(
     console.log(`Connected to the staff_db database.`)
 );
 
-inquirer.prompt([
-    {
-        type: "list",
-        name: "options",
-        message: "What would you like to do?"
-    }
-])
+function init() {
+    inquirer.prompt([
+        {
+            type: "list",
+            name: "options",
+            message: "What would you like to do?",
+            choices: [
+                "View All Employees",
+                "Add Employee",
+                "Update Employee Role",
+                "View All Roles",
+                "Add Role",
+                "View All Departments",
+                "Add Department",
+                "Quit",
+            ],
+        },
+    ])
+    .then((answers) => {
+        switch (answers.choice) {
+            case "View All Employees":
+                viewEmployee();
+                break;
+            case "Add Employee":
+                addEmployee();
+                break;
+            case "Update Employee Role":
+                updateEmployeeRole();
+                break;
+            case "View All Roles":
+                viewRole();
+                break;
+            case "Add Role":
+                addRole();
+                break;
+            case "View All Departments":
+                viewDepartment();
+                break;
+            case "Add Department":
+                addDepartment();
+                break;
+            default:
+                return;
+        }
+    })
+}
+
+function viewEmployee() {
+
+};
+
+function addEmployee() {
+
+};
+
+function updateEmployeeRole() {
+
+};
+
+function viewRole() {
+
+};
+
+function addRole() {
+
+};
+
+function viewDepartment() {
+
+};
+
+function addDepartment() {
+
+};
 
 
 // more middleware
@@ -40,3 +107,5 @@ app.use((req, res) => {
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
 });
+
+init();
