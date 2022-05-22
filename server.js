@@ -2,6 +2,7 @@
 const express = require('express');
 const mysql = require('mysql2');
 const inquirer = require('inquirer');
+const cTable = require('console.table');
 
 // declaring additional variable, PORT which designates 3001/local host, as well as enviroment variable for deployment
 const PORT = process.env.PORT || 3001;
