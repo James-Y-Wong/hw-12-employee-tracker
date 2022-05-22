@@ -22,6 +22,15 @@ const db = mysql.createConnection(
     console.log(`Connected to the staff_db database.`)
 );
 
+inquirer.prompt([
+    {
+        type: "list",
+        name: "options",
+        message: "What would you like to do?"
+    }
+])
+
+
 // more middleware
 app.use((req, res) => {
     res.status(404).end();
