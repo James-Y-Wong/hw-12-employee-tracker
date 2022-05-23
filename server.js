@@ -3,7 +3,7 @@ const express = require('express');
 const mysql = require('mysql2');
 const inquirer = require('inquirer');
 const cTable = require('console.table');
-// const figlet = require('figlet');
+const figlet = require('figlet');
 
 // declaring additional variable, PORT which designates 3001/local host, as well as enviroment variable for deployment
 const PORT = process.env.PORT || 3001;
@@ -20,13 +20,13 @@ const db = mysql.createConnection(
       password: 'root',
       database: 'staff_db'
     },
-    console.log(`Connected to the staff_db database.`)
+    console.log(figlet.textSync("Employee Tracker")),
+    console.log(`\nConnected to the staff_db database.`),
+    console.log('\n---------------')
 );
 
 
 function init() {
-    console.log("\nEmployee Tracker");
-    console.log('\n---------------');
     inquirer.prompt([
         {
             type: "list",
