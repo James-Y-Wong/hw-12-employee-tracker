@@ -93,21 +93,45 @@ function addEmployee() {
             type: "input",
             message: "First name?",
             name: "firstName",
+            validate: (data) => {
+                if (data !== "") {
+                    return true;
+                }
+                return "Please enter at least one character";
+            },
         },
         {
             type: "input",
             message: "Last name?",
             name: "lastName",
+            validate: (data) => {
+                if (data !== "") {
+                    return true;
+                }
+                return "Please enter at least one character";
+            },
         },
         {
             type: "input",
             message: "Role ID?",
             name: "roleID",
+            validate: (data) => {
+                if (data !== "") {
+                    return true;
+                }
+                return "Please enter at least one character";
+            },
         },
         {
             type: "input",
             message: "Manager ID?",
             name: "managerID",
+            validate: (data) => {
+                if (data !== "") {
+                    return true;
+                }
+                return "Please enter at least one character";
+            },
         },
     ])
     .then((data) => {
@@ -168,6 +192,7 @@ function addDepartment() {
     inquirer.prompt([
         {
             type: "input",
+            message: "Department Name?",
             name: "departmentName",
             validate: (data) => {
                 if (data !== "") {
