@@ -64,10 +64,10 @@ function init() {
                 addDepartment();
                 break;
             default:
-                return;
+                quit();
         }
     })
-}
+};
 
 function viewEmployee() {
 
@@ -82,7 +82,9 @@ function updateEmployeeRole() {
 };
 
 function viewRole() {
-
+    db.query('SELECT * FROM role', function (err, results) {
+        console.table(results);
+    });
 };
 
 function addRole() {
@@ -95,6 +97,11 @@ function viewDepartment() {
 
 function addDepartment() {
 
+};
+
+function quit() {
+    console.log("Goodbye!");
+    process.exit();
 };
 
 
