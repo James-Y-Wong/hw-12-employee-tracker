@@ -74,7 +74,7 @@ function init() {
 };
 
 function viewEmployee() {
-    db.query('SELECT employee.id AS "ID", first_name AS "First Name", last_name AS "Last Name", title AS "Title", department_name AS "Department", salary AS "Salary",  AS "Manager" FROM employee JOIN role ON employee.role_id = role.id JOIN department ON role.department_id = department.id', function (err, results) {
+    db.query('SELECT employee.id AS "ID", first_name AS "First Name", last_name AS "Last Name", title AS "Title", department_name AS "Department", salary AS "Salary", manager_id AS "Manager" FROM employee JOIN role ON employee.role_id = role.id JOIN department ON role.department_id = department.id', function (err, results) {
         if (err) {
             throw (err);
         } else {
@@ -84,6 +84,8 @@ function viewEmployee() {
         }
     });
 };
+
+
 
 function addEmployee() {
 
@@ -122,7 +124,37 @@ function viewDepartment() {
 };
 
 function addDepartment() {
-
+    inquirer.prompt([
+        {
+            type: "input",
+            name: "departmentName",
+            validate: (data) => {
+                if (data !== "") {
+                    return true;
+                }
+                return "Please enter at least one character";
+            },
+        },
+    ])
+    .then ((data) => {
+        const departmentName = data.departmentName;
+        db.query(`INSERT INTO department(department_name) VALUES ("${departmentName}");`, function (err, results) {
+            if (err) {
+                throw (err);
+            } else {
+                console.log("A new department has been added successfully!");
+            }
+        });
+        db.query('SELECT department.id AS "ID", department_name AS "Department" FROM department', function (err, results) {
+            if (err) {
+                throw (err);
+            } else {
+                console.log("\n-----------------");
+                console.table("\n", results, "\n---------------");
+                init();
+            }
+        });
+    });
 };
 
 function quit() {
