@@ -22,7 +22,10 @@ const db = mysql.createConnection(
     console.log(`Connected to the staff_db database.`)
 );
 
+
 function init() {
+    console.log("\nEmployee Tracker");
+    console.log('\n---------------');
     inquirer.prompt([
         {
             type: "list",
@@ -40,8 +43,8 @@ function init() {
             ],
         },
     ])
-    .then((answers) => {
-        switch (answers.choice) {
+    .then((data) => {
+        switch (data.options) {
             case "View All Employees":
                 viewEmployee();
                 break;
@@ -82,8 +85,14 @@ function updateEmployeeRole() {
 };
 
 function viewRole() {
-    db.query('SELECT * FROM role', function (err, results) {
-        console.table(results);
+    db.query('SELECT id, title FROM role', function (err, results) {
+        if (err) {
+            throw (err);
+        } else {
+            console.log("\n-----------------");
+            console.table("\n", results, "\n---------------");
+            init();
+        }
     });
 };
 
