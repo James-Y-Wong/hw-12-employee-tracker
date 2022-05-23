@@ -3,6 +3,7 @@ const express = require('express');
 const mysql = require('mysql2');
 const inquirer = require('inquirer');
 const cTable = require('console.table');
+// const figlet = require('figlet');
 
 // declaring additional variable, PORT which designates 3001/local host, as well as enviroment variable for deployment
 const PORT = process.env.PORT || 3001;
@@ -73,7 +74,7 @@ function init() {
 };
 
 function viewEmployee() {
-    db.query('SELECT employee.id AS "ID", first_name AS "First Name", last_name AS "Last Name", title AS "Title", department_name AS "Department", salary AS "Salary", manager_id AS "Manager" FROM employee JOIN role ON employee.role_id = role.id JOIN department ON role.department_id = department.id', function (err, results) {
+    db.query('SELECT employee.id AS "ID", first_name AS "First Name", last_name AS "Last Name", title AS "Title", department_name AS "Department", salary AS "Salary",  AS "Manager" FROM employee JOIN role ON employee.role_id = role.id JOIN department ON role.department_id = department.id', function (err, results) {
         if (err) {
             throw (err);
         } else {
