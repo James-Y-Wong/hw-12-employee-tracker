@@ -85,7 +85,7 @@ function updateEmployeeRole() {
 };
 
 function viewRole() {
-    db.query('SELECT id, title FROM role', function (err, results) {
+    db.query('SELECT role.id, title, department_name, salary FROM role JOIN department ON role.department_id = department.id', function (err, results) {
         if (err) {
             throw (err);
         } else {
@@ -101,7 +101,15 @@ function addRole() {
 };
 
 function viewDepartment() {
-
+    db.query('SELECT * FROM department', function (err, results) {
+        if (err) {
+            throw (err);
+        } else {
+            console.log("\n-----------------");
+            console.table("\n", results, "\n---------------");
+            init();
+        }
+    });
 };
 
 function addDepartment() {
