@@ -88,7 +88,48 @@ function viewEmployee() {
 
 
 function addEmployee() {
-
+    inquirer.prompt([
+        {
+            type: "input",
+            message: "First name?",
+            name: "firstName",
+        },
+        {
+            type: "input",
+            message: "Last name?",
+            name: "lastName",
+        },
+        {
+            type: "input",
+            message: "Role ID?",
+            name: "roleID",
+        },
+        {
+            type: "input",
+            message: "Manager ID?",
+            name: "managerID",
+        },
+    ])
+    .then((data) => {
+        const firstName = data.firstName;
+        const lastName = data.lastName;
+        const roleID = data.roleID;
+        const managerID = data.managerID;
+        db.query(`INSERT INTO employee(first_name, last_name, role_id, manager_id) VALUES ("${firstName}", "${lastName}", "${roleID}", "${managerID}")`, function (err, results) {
+            if (err) {
+                throw (err);
+            } else console.log("A new employee has been added successfully!");
+        });
+        db.query('SELECT employee.id AS "ID", first_name AS "First Name", last_name AS "Last Name", title AS "Title", department_name AS "Department", salary AS "Salary", manager_id AS "Manager" FROM employee JOIN role ON employee.role_id = role.id JOIN department ON role.department_id = department.id', function (err, results) {
+            if (err) {
+                throw (err);
+            } else {
+                console.log("\n-----------------");
+                console.table("\n", results, "\n---------------");
+                init();
+            }
+        });
+    });
 };
 
 function updateEmployeeRole() {
