@@ -157,7 +157,48 @@ function addEmployee() {
 };
 
 function updateEmployeeRole() {
-
+    inquirer.prompt([
+        {
+            type: "input",
+            message: "Employee ID?",
+            name: "employeeID",
+            validate: (data) => {
+                if (data !== "") {
+                    return true;
+                }
+                return "Please enter at least one character";
+            },
+        },
+        {
+            type: "input",
+            message: "New Role ID?",
+            name: "roleID",
+            validate: (data) => {
+                if (data !== "") {
+                    return true;
+                }
+                return "Please enter at least one character";
+            },
+        },
+    ])
+    .then((data) => {
+        const employeeID = data.employeeID;
+        const roleID = data.roleID;
+        db.query(`INSERT INTO employee(employee.id, role_id) VALUES ("${employeeID}", "${roleID}")`, function (err, results) {
+            if (err) {
+                throw (err);
+            } else console.log("A new role for selected employee has been added successfully!");
+        });
+        db.query('SELECT employee.id AS "ID", first_name AS "First Name", last_name AS "Last Name", title AS "Title", department_name AS "Department", salary AS "Salary", manager_id AS "Manager" FROM employee JOIN role ON employee.role_id = role.id JOIN department ON role.department_id = department.id', function (err, results) {
+            if (err) {
+                throw (err);
+            } else {
+                console.log("\n-----------------");
+                console.table("\n", results, "\n---------------");
+                init();
+            }
+        });
+    });
 };
 
 function viewRole() {
@@ -173,7 +214,60 @@ function viewRole() {
 };
 
 function addRole() {
-
+    inquirer.prompt([
+        {
+            type: "input",
+            message: "Role Name?",
+            name: "roleName",
+            validate: (data) => {
+                if (data !== "") {
+                    return true;
+                }
+                return "Please enter at least one character";
+            },
+        },
+        {
+            type: "input",
+            message: "Salary?",
+            name: "salary",
+            validate: (data) => {
+                if (data !== "") {
+                    return true;
+                }
+                return "Please enter at least one character";
+            },
+        },
+        {
+            type: "input",
+            message: "Department ID?",
+            name: "department",
+            validate: (data) => {
+                if (data !== "") {
+                    return true;
+                }
+                return "Please enter at least one character";
+            },
+        },
+    ])
+    .then((data) => {
+        const roleName = data.roleName;
+        const salary = data.salary;
+        const department = data.department;
+        db.query(`INSERT INTO role(title, salary, department_id) VALUES ("${roleName}", "${salary}", "${department}")`, function (err, results) {
+            if (err) {
+                throw (err);
+            } else console.log("A new role has been added successfully!");
+        });
+        db.query('SELECT role.id AS "ID", title AS "Title", department_name AS "Department", salary AS "Salary" FROM role JOIN department ON role.department_id = department.id', function (err, results) {
+            if (err) {
+                throw (err);
+            } else {
+                console.log("\n-----------------");
+                console.table("\n", results, "\n---------------");
+                init();
+            }
+        });
+    });
 };
 
 function viewDepartment() {
