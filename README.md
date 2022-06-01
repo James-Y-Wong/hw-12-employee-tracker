@@ -27,6 +27,26 @@
   Make sure you have all the prerequisites and packages installed. 
   
   - Log into MySQL and run SOURCE schema.sql and seeds.sql; Exit MySQL and run node server.js; Select from drop down list on what you would like to do; Follow command-line prompts
+
+  >Screenshot of initial questions:
+  >
+  >![Initial Screenshot](/images/employee-tracker-init-screenshot.png)
+
+  >Screenshot of all employees:
+  >
+  >![Employee Screenshot](/images/employee-tracker-employee-screenshot.png)
+
+  >Screenshot of all roles:
+  >
+  >![Role Screenshot](/images/employee-tracker-role-screenshot.png)
+
+  >Screenshot of all departments:
+  >
+  >![Department Screenshot](/images/employee-tracker-dept-screenshot.png)
+
+  >Screenshot of quit:
+  >
+  >![Quit Screenshot](/images/employee-tracker-quit-screenshot.png)
   
   ## License
   
