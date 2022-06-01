@@ -28,6 +28,8 @@
   
   - Log into MySQL and run SOURCE schema.sql and seeds.sql; Exit MySQL and run node server.js; Select from drop down list on what you would like to do; Follow command-line prompts
 
+  - [Video Link](https://drive.google.com/file/d/1ed8dmnbzVahxxjjb4DUFKf2mq_qEj3Yd/view)
+
   >Screenshot of initial questions:
   >
   >![Initial Screenshot](/images/employee-tracker-init-screenshot.png)
